@@ -44,8 +44,7 @@ namespace CommunicationServers.Sockets
             }
             try
             {
-                //Socket.BeginConnect(ip,)
-                //Socket.Connect(ip, Convert.ToInt32(Port));
+                Socket.Connect(ip, Convert.ToInt32(Port));
                 Socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), Socket);
                 return true;
             }

@@ -7,17 +7,30 @@
       xmlns:wpfsource="clr-namespace:WpfResource.Resource;assembly=WpfResource"
       xmlns:Control="clr-namespace:MesToPlc.UserControls"
       mc:Ignorable="d" 
-      Title="OperatePage" Width="901" Height="601" Background="Gray">
+      Title="OperatePage" d:DesignHeight="300" d:DesignWidth="1000" Background="Gray">
     <Page.Resources>
         <Style BasedOn="{StaticResource DefaultTextBox}" TargetType="TextBox">
-            <!--Width="215" Height="35" Margin="10,0"-->
             <Setter Property="Height" Value="35"></Setter>
             <Setter Property="Width" Value="215"></Setter>
             <Setter Property="Margin" Value="10,0"></Setter>
             <Setter Property="wpfsource:ControlAttachProperty.CornerRadius" Value="5"></Setter>
         </Style>
+        <Style TargetType="Control:PLCCollect">
+            <Setter Property="Margin" Value="20,10"></Setter>
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        </Style>
     </Page.Resources>
     <Grid>
-        <Control:PLCCollect></Control:PLCCollect>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <WrapPanel>
+                <Control:PLCCollect Title="电机支架机器人铆接专机"></Control:PLCCollect>
+                <Control:PLCCollect Title="风道支架机器人铆接专机"></Control:PLCCollect>
+                <Control:PLCCollect Title="围板压合定位专机"></Control:PLCCollect>
+                <Control:PLCCollect Title="围板滚压包边专机"></Control:PLCCollect>
+                <Control:PLCCollect Title="组合压铆专机"></Control:PLCCollect>
+                <Control:PLCCollect Title="风道法兰机器人铆接专机"></Control:PLCCollect>
+                <Control:PLCCollect Title="接油盘机器人铆接专机"></Control:PLCCollect>
+            </WrapPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

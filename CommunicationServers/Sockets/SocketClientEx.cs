@@ -54,6 +54,7 @@ namespace CommunicationServers.Sockets
             {
                 IPEndPoint remoteEP = new IPEndPoint(ip, int.Parse(Port));
                 clientSocket.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), clientSocket);
+                connectDone.WaitOne();
                 Receive(clientSocket);
                 return true;
             }
@@ -83,55 +84,24 @@ namespace CommunicationServers.Sockets
         }
 
         /// <summary>
-        /// 接收数据
-        /// </summary>
-        /// <param name="ar"></param>
-        //private void ReceiveMessage(IAsyncResult ar)
-        //{
-        //    var socket = ar.AsyncState as Socket;
-        //    try
-        //    {
-        //        var length = socket.EndReceive(ar);
-        //        if (length == 0) throw new Exception();
-        //        Thread td = new Thread(() => {
-        //            byte[] message = new byte[length];
-        //            Array.Copy(buffer, message, length);
-        //            NewMessageEvent(socket, message);
-        //        });
-        //        td.Start();
-        //        socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveMessage), socket);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        clientSocket.Close();
-        //        if (ServerDisconnectedEvent != null) ServerDisconnectedEvent(socket);
-        //    }
-        //}
-
-        /// <summary>
         /// 发送数据
         /// </summary>
-        /// <param name="ServerSocket"></param>
-        /// <param name="Message"></param>
-        //public void Send(byte[] buffer)
-        //{
-        //    try
-        //    {
-        //        this.clientSocket.Send(buffer);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        SimpleLogHelper.Instance.WriteLog(LogType.Error, ex);
-        //    }
-        //}
-
-        //public void Send(String data)
-        //{
-        //    // Convert the string data to byte data using ASCII encoding.
-        //    byte[] byteData = Encoding.ASCII.GetBytes(data);
-        //    // Begin sending the data to the remote device.
-        //    client.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), client);
-        //}
+        /// <param name = "ServerSocket" ></ param >
+        /// < param name="Message"></param>
+        public void Send(Socket client, byte[] buffer)
+        {
+            try
+            {
+                if (client.Connected == true)
+                {
+                    client.BeginSend(buffer, 0, buffer.Length, 0, new AsyncCallback(SendCallback), client);
+                }
+            }
+            catch (Exception ex)
+            {
+                SimpleLogHelper.Instance.WriteLog(LogType.Error, ex);
+            }
+        }
 
         public void Send(Socket client, String data)
         {

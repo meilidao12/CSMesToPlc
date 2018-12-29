@@ -29,6 +29,8 @@ namespace MesToPlc.UserControls
         IniHelper ini = new IniHelper(System.AppDomain.CurrentDomain.BaseDirectory + @"\Set.ini");
         CharacterConversion characterConversion;
         DispatcherTimer PLCGetTimer = new DispatcherTimer(); //采集plc数据
+        string plcPort;
+        string plcIp;
         public PLCCollect()
         {
             InitializeComponent();
@@ -37,22 +39,33 @@ namespace MesToPlc.UserControls
 
         private void PLCCollect_Loaded(object sender, RoutedEventArgs e)
         {
-            ConnectToPlc();
-            PLCGetTimer.Interval = TimeSpan.FromSeconds(1);
-            PLCGetTimer.Tick += PLCGetTimer_Tick;
-            PLCGetTimer.Start();
+            //plcPort = ini.ReadIni("Demo", "Port");
+            //plcIp = ini.ReadIni("Demo", "Ip");
+            //ConnectToPlc();
+            //PLCGetTimer.Interval = TimeSpan.FromSeconds(1);
+            //PLCGetTimer.Tick += PLCGetTimer_Tick;
+            //PLCGetTimer.Start();
         }
 
         private void PLCGetTimer_Tick(object sender, EventArgs e)
         {
-            Debug.WriteLine("开始发送数据");
-            socPlc.Send(socPlc.ClientSocket, "09A80000000601030000007B");
+            //检测连接是否成功
+            if(socPlc.IsConnected())
+            {
+                string senddata = "000100000006010300C8007B";
+                CharacterConversion cc = new CharacterConversion();
+                socPlc.Send(socPlc.ClientSocket, cc.HexConvertToByte(senddata));
+            }
+            else
+            {
+                socPlc.NewMessageEvent -= SocPlc_NewMessageEvent;
+                ConnectToPlc();
+            }
         }
 
         private void ConnectToPlc()
         {
-            string plcPort = ini.ReadIni("Demo", "Port");
-            string plcIp = ini.ReadIni("Demo", "Ip");
+            
             socPlc = new SocketClientEx();
             socPlc.NewMessageEvent += SocPlc_NewMessageEvent;
             socPlc.Connnect(plcPort, plcIp);
@@ -66,6 +79,29 @@ namespace MesToPlc.UserControls
             }));
         }
 
+        private void btnCeShi_Click(object sender, RoutedEventArgs e)
+        {
+            this.Height = 400;
+        }
 
+
+        private string title;
+        /// <summary>
+        /// 名称
+        /// </summary>
+
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+
+            set
+            {
+                title = value;
+                this.txbTitle.Text = title;
+            }
+        }
     }
 }

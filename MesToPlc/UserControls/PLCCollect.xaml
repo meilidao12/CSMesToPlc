@@ -5,8 +5,79 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MesToPlc.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock Name="tbxDebbug"></TextBlock>  
+             d:DesignHeight="300" d:DesignWidth="300"  Height="200" Width="300">
+    <Control.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="80"></Setter>
+            <Setter Property="Margin" Value="0,0,3,0"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="180"></Setter>
+        </Style>
+    </Control.Resources>
+    <Grid Background="White">
+        <StackPanel>
+            <StackPanel Background="Bisque">
+                <StackPanel Orientation="Horizontal" Margin="10,5">
+                    <TextBlock Name="txbTitle" FontSize="15"  Width="250" ></TextBlock>
+                    <Image Name="ConnectState"  Source="/Resource/Normal.png" Width="20" ></Image>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel MinHeight="100" Visibility="Visible" Margin="10,0">
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <TextBlock>调试窗口</TextBlock>
+                    <TextBox Name="tbxDebbug"></TextBox>
+                </StackPanel>
+                <Button Name="btnCeShi" Click="btnCeShi_Click">测试</Button>
+                <StackPanel>
+                    <!--累计上电时间-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock>累计上电时间</TextBlock>
+                        <TextBox Name="txtLeiJiShangDianShiJian"></TextBox>
+                    </StackPanel>
+                    <!--累计授权时间-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock>累计授权时间</TextBlock>
+                        <TextBox Name="txtLeiJiShouQuanShiJian" ></TextBox>
+                    </StackPanel>
+                    <!--累计故障时间-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock>累计故障时间</TextBlock>
+                        <TextBox Name="txtLeiJiGuZhangShiJian"></TextBox>
+                    </StackPanel>
+                    <!--累计检修时间-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock>累计检修时间</TextBlock>
+                        <TextBox Name="txtLeiJiJianXiuShiJian"></TextBox>
+                    </StackPanel>
+                    <!--累计待机时间-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock>累计待机时间</TextBlock>
+                        <TextBox Name="txtLeiJiDaiJiShiJian"></TextBox>
+                    </StackPanel>
+                    <!--累计运行时间-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock>累计运行时间</TextBlock>
+                        <TextBox Name="txtLeiJiYunXingShiJian"></TextBox>
+                    </StackPanel>
+                    <!--节拍周期时间-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock>节拍周期时间</TextBlock>
+                        <TextBox Name="txtJiePaiZhouQiShiJian"></TextBox>
+                    </StackPanel>
+                    <!--累计产量-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock>累计产量</TextBlock>
+                        <TextBox Name="txtLeiJiChanLiang"></TextBox>
+                    </StackPanel>
+                    <!--当班产量-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock>当班产量</TextBlock>
+                        <TextBox Name="txtDangBanChanLiang"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
