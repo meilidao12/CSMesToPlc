@@ -3,81 +3,160 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpfsource="clr-namespace:WpfResource.Resource;assembly=WpfResource"
              xmlns:local="clr-namespace:MesToPlc.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"  Height="200" Width="300">
+             d:DesignHeight="600" d:DesignWidth="400">
     <Control.Resources>
+        <SolidColorBrush x:Key="DarkBlue" Color="#315E9C"></SolidColorBrush>
+        <SolidColorBrush x:Key="LightBlue" Color="#577FC0"></SolidColorBrush>
         <Style TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Width" Value="80"></Setter>
-            <Setter Property="Margin" Value="0,0,3,0"></Setter>
+            <Setter Property="Width" Value="90"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="Margin" Value="40,0,10,0"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="Width" Value="180"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="wpfsource:ControlAttachProperty.CornerRadius" Value="5"></Setter>
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource LightBlue}"></Setter>
+            <Setter Property="BorderBrush" Value="Gray"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
         </Style>
     </Control.Resources>
-    <Grid Background="White">
+    <Border Style="{Binding null}" CornerRadius="5" Width="400" Background="{StaticResource DarkBlue}">
+    <StackPanel>
+        <Border Background="{StaticResource LightBlue}" Height="40" CornerRadius="5,5,0,0">
+            <Grid Margin="10,5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="347*"/>
+                        <ColumnDefinition Width="33*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <TextBlock Name="txbTitle" FontSize="20" HorizontalAlignment="Left" Style="{Binding null}" Foreground="White"></TextBlock>
+                <Image Name="ConnectState"  Source="/Resource/Normal.png" Width="30" HorizontalAlignment="Right" ></Image>
+            </Grid>
+        </Border>
         <StackPanel>
-            <StackPanel Background="Bisque">
-                <StackPanel Orientation="Horizontal" Margin="10,5">
-                    <TextBlock Name="txbTitle" FontSize="15"  Width="250" ></TextBlock>
-                    <Image Name="ConnectState"  Source="/Resource/Normal.png" Width="20" ></Image>
+            <!--状态-->
+            <Border Name="bdState" Height="40" MouseDown="bdState_MouseDown" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{Binding null}" Name="txbState" FontSize="20" VerticalAlignment="Center"
+                                FontFamily="/MesToPlc;component/#iconfont"
+                               Text="&#xe605;" Foreground="White"
+                               Margin="30,0,115,0">
+                    </TextBlock>
+                    <TextBlock Style="{Binding null}" VerticalAlignment="Center" FontSize="15"
+                               Foreground="White" HorizontalAlignment="Center">状态</TextBlock>
+                </StackPanel>
+            </Border>
+            <StackPanel  Margin="30,5" Name="spState">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>状态</TextBlock>
+                    <TextBox Name="tbxDebbug"></TextBox>
+                    <TextBlock></TextBlock>
                 </StackPanel>
             </StackPanel>
-            <StackPanel MinHeight="100" Visibility="Visible" Margin="10,0">
-                <StackPanel Orientation="Horizontal" Margin="0,5">
-                    <TextBlock>调试窗口</TextBlock>
-                    <TextBox Name="tbxDebbug"></TextBox>
+            <!--信息-->
+            <Border Height="40" Name="bdXinXi" MouseDown="bdXinXi_MouseDown">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{Binding null}" Name="txbXinXi" FontSize="20" Width="20" 
+                        FontFamily="/MesToPlc;component/#iconfont" Text="&#xe6a2;"
+                          Margin="30,0,100,0"
+                        Foreground="White"  VerticalAlignment="Center">
+                    </TextBlock>
+                        <TextBlock Style="{Binding null}" VerticalAlignment="Center" FontSize="15"
+                               Foreground="White" HorizontalAlignment="Center">采集信息</TextBlock>
                 </StackPanel>
-                <Button Name="btnCeShi" Click="btnCeShi_Click">测试</Button>
-                <StackPanel>
-                    <!--累计上电时间-->
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock>累计上电时间</TextBlock>
-                        <TextBox Name="txtLeiJiShangDianShiJian"></TextBox>
-                    </StackPanel>
-                    <!--累计授权时间-->
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock>累计授权时间</TextBlock>
-                        <TextBox Name="txtLeiJiShouQuanShiJian" ></TextBox>
-                    </StackPanel>
-                    <!--累计故障时间-->
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock>累计故障时间</TextBlock>
-                        <TextBox Name="txtLeiJiGuZhangShiJian"></TextBox>
-                    </StackPanel>
-                    <!--累计检修时间-->
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock>累计检修时间</TextBlock>
-                        <TextBox Name="txtLeiJiJianXiuShiJian"></TextBox>
-                    </StackPanel>
-                    <!--累计待机时间-->
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock>累计待机时间</TextBlock>
-                        <TextBox Name="txtLeiJiDaiJiShiJian"></TextBox>
-                    </StackPanel>
-                    <!--累计运行时间-->
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock>累计运行时间</TextBlock>
-                        <TextBox Name="txtLeiJiYunXingShiJian"></TextBox>
-                    </StackPanel>
-                    <!--节拍周期时间-->
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock>节拍周期时间</TextBlock>
-                        <TextBox Name="txtJiePaiZhouQiShiJian"></TextBox>
-                    </StackPanel>
-                    <!--累计产量-->
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock>累计产量</TextBlock>
-                        <TextBox Name="txtLeiJiChanLiang"></TextBox>
-                    </StackPanel>
-                    <!--当班产量-->
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock>当班产量</TextBlock>
-                        <TextBox Name="txtDangBanChanLiang"></TextBox>
-                    </StackPanel>
+            </Border>
+            <StackPanel Margin="30,5" Name="spXinXin">
+                <!--累计上电时间-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>累计上电时间</TextBlock>
+                    <TextBox Name="txtLeiJiShangDianShiJian"></TextBox>
+                    <TextBlock Width="50" Margin="10,0">Min</TextBlock>
+                </StackPanel>
+                <!--累计授权时间-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>累计授权时间</TextBlock>
+                    <TextBox Name="txtLeiJiShouQuanShiJian" ></TextBox>
+                    <TextBlock Width="50" Margin="10,0">Min</TextBlock>
+                </StackPanel>
+                <!--累计故障时间-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>累计故障时间</TextBlock>
+                    <TextBox Name="txtLeiJiGuZhangShiJian"></TextBox>
+                    <TextBlock Width="50" Margin="10,0">Min</TextBlock>
+                </StackPanel>
+                <!--累计检修时间-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>累计检修时间</TextBlock>
+                    <TextBox Name="txtLeiJiJianXiuShiJian"></TextBox>
+                    <TextBlock Width="50" Margin="10,0">Min</TextBlock>
+                </StackPanel>
+                <!--累计待机时间-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>累计待机时间</TextBlock>
+                    <TextBox Name="txtLeiJiDaiJiShiJian"></TextBox>
+                    <TextBlock Width="50" Margin="10,0">Min</TextBlock>
+                </StackPanel>
+                <!--累计运行时间-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>累计运行时间</TextBlock>
+                    <TextBox Name="txtLeiJiYunXingShiJian"></TextBox>
+                    <TextBlock Width="50" Margin="10,0">Min</TextBlock>
+                </StackPanel>
+                <!--节拍周期时间-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>节拍周期时间</TextBlock>
+                    <TextBox Name="txtJiePaiZhouQiShiJian"></TextBox>
+                    <TextBlock Width="50" Margin="10,0">Min</TextBlock>
+                </StackPanel>
+                <!--累计产量-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>累计产量</TextBlock>
+                    <TextBox Name="txtLeiJiChanLiang"></TextBox>
+                    <TextBlock Width="50" Margin="10,0">件</TextBlock>
+                </StackPanel>
+                <!--当班产量-->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>当班产量</TextBlock>
+                    <TextBox Name="txtDangBanChanLiang"></TextBox>
+                    <TextBlock  Margin="10,0">件</TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <!--设置-->
+            <Border Height="40" Name="bdSet" MouseDown="bdSet_MouseDown">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{Binding null}" Name="txbSet" FontSize="20" 
+                               FontFamily="/MesToPlc;component/#iconfont" Text="&#xe62c;" 
+                               Foreground="White" 
+                               Margin="30,0,115,0" VerticalAlignment="Center">
+                    </TextBlock>
+                    <TextBlock Style="{Binding null}" VerticalAlignment="Center" FontSize="15"
+                            Foreground="White" HorizontalAlignment="Center">设置</TextBlock>
+                </StackPanel>
+            </Border>
+            <StackPanel Name="spSet" Margin="30,0">
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>IP</TextBlock>
+                    <TextBox Name="txtIP" Width="150"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock>Port</TextBlock>
+                    <TextBox Name="txtPort" Width="150"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                     <Button Name="btnSave" Margin="180,0" Width="80" FontSize="20" Click="btnSave_Click">保存</Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-    </Grid>
+    </StackPanel>
+    </Border>
 </UserControl>

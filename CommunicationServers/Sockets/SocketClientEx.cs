@@ -54,8 +54,12 @@ namespace CommunicationServers.Sockets
             {
                 IPEndPoint remoteEP = new IPEndPoint(ip, int.Parse(Port));
                 clientSocket.BeginConnect(remoteEP, new AsyncCallback(ConnectCallback), clientSocket);
-                connectDone.WaitOne();
+                if(!connectDone.WaitOne(100,false)) //100ms没有连接成功则认为连接失败
+                {
+                    return false;
+                }
                 Receive(clientSocket);
+                isConnected = true;
                 return true;
             }
             catch (Exception ex)
@@ -75,6 +79,7 @@ namespace CommunicationServers.Sockets
                 client.EndConnect(ar);
                 client.RemoteEndPoint.ToString();
                 // Signal that the connection has been made.
+                isConnected = client.Connected;
                 connectDone.Set();
             }
             catch (Exception ex)
@@ -188,7 +193,7 @@ namespace CommunicationServers.Sockets
             }
             catch (Exception e)
             {
-                clientSocket.Disconnect(true);
+                isConnected = false;
                 SimpleLogHelper.Instance.WriteLog(LogType.Info, "客户端连接断开");
             }
 
@@ -212,17 +217,17 @@ namespace CommunicationServers.Sockets
             }
         }
 
+        private bool isConnected;
         /// <summary>
         /// 判断网络连接状态
         /// </summary>
         /// <returns></returns>
-        public bool IsConnected()
+        public bool IsConnected
         {
-            if (clientSocket.Connected)
+            get
             {
-                return true;
+                return isConnected;
             }
-            return false;
         }
 
         public byte[] ASCIIConvertToByte(string strASCII)

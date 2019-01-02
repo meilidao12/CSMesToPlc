@@ -7,8 +7,9 @@
       xmlns:wpfsource="clr-namespace:WpfResource.Resource;assembly=WpfResource"
       xmlns:Control="clr-namespace:MesToPlc.UserControls"
       mc:Ignorable="d" 
-      Title="OperatePage" d:DesignHeight="300" d:DesignWidth="1000" Background="Gray">
+      Title="OperatePage" d:DesignHeight="300" d:DesignWidth="1000">
     <Page.Resources>
+        <SolidColorBrush x:Key="LightGreen" Color="#DBEBCE"></SolidColorBrush>
         <Style BasedOn="{StaticResource DefaultTextBox}" TargetType="TextBox">
             <Setter Property="Height" Value="35"></Setter>
             <Setter Property="Width" Value="215"></Setter>
@@ -16,11 +17,11 @@
             <Setter Property="wpfsource:ControlAttachProperty.CornerRadius" Value="5"></Setter>
         </Style>
         <Style TargetType="Control:PLCCollect">
-            <Setter Property="Margin" Value="20,10"></Setter>
+            <Setter Property="Margin" Value="40,20,10,20"></Setter>
             <Setter Property="VerticalAlignment" Value="Top"></Setter>
         </Style>
     </Page.Resources>
-    <Grid>
+    <Grid Background="{StaticResource LightGreen}">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
             <WrapPanel>
                 <Control:PLCCollect Title="电机支架机器人铆接专机"></Control:PLCCollect>
