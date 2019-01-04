@@ -42,6 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnalysisDataModel.cs" />
+    <Compile Include="ChangShaChuangYan\BaseAnalysis.cs" />
+    <Compile Include="ChangShaChuangYan\DianJiZhiJia.cs" />
+    <Compile Include="ChangShaChuangYan\FengDaoFaLan.cs" />
+    <Compile Include="ChangShaChuangYan\FengDaoZhiJia.cs" />
+    <Compile Include="ChangShaChuangYan\JieYouPanJi.cs" />
+    <Compile Include="ChangShaChuangYan\ProtocolHelper.cs" />
+    <Compile Include="ChangShaChuangYan\WeiBanGunYa.cs" />
+    <Compile Include="ChangShaChuangYan\WeiBanYaHe.cs" />
+    <Compile Include="ChangShaChuangYan\ZuHeYaMao.cs" />
     <Compile Include="GPRSProtocol.cs" />
     <Compile Include="Interface\IAnalysisDataHelper.cs" />
     <Compile Include="Modbus\ModbusFunction.cs" />
@@ -61,6 +70,7 @@
       <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

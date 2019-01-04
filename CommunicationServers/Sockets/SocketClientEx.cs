@@ -59,7 +59,6 @@ namespace CommunicationServers.Sockets
                     return false;
                 }
                 Receive(clientSocket);
-                isConnected = true;
                 return true;
             }
             catch (Exception ex)
@@ -79,7 +78,6 @@ namespace CommunicationServers.Sockets
                 client.EndConnect(ar);
                 client.RemoteEndPoint.ToString();
                 // Signal that the connection has been made.
-                isConnected = client.Connected;
                 connectDone.Set();
             }
             catch (Exception ex)
@@ -193,7 +191,7 @@ namespace CommunicationServers.Sockets
             }
             catch (Exception e)
             {
-                isConnected = false;
+                IsConnected = false;
                 SimpleLogHelper.Instance.WriteLog(LogType.Info, "客户端连接断开");
             }
 
@@ -227,6 +225,10 @@ namespace CommunicationServers.Sockets
             get
             {
                 return isConnected;
+            }
+            set
+            {
+                isConnected = value;
             }
         }
 
@@ -267,7 +269,7 @@ namespace CommunicationServers.Sockets
         // Client socket.
         public Socket workSocket = null;
         // Size of receive buffer.
-        public const int BufferSize = 256;
+        public const int BufferSize = 1000;
         // Receive buffer.
         public byte[] buffer = new byte[BufferSize];
         // Received data string.

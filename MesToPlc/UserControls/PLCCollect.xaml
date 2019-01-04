@@ -58,9 +58,20 @@
             </Border>
             <StackPanel  Margin="30,5" Name="spState">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>状态</TextBlock>
-                    <TextBox Name="tbxDebbug"></TextBox>
-                    <TextBlock></TextBlock>
+                    <TextBlock>正常生产状态</TextBlock>
+                    <Image Name="imgAutoRun"  Source="/Resource/Normal.png" Width="25" HorizontalAlignment="Right" ></Image>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>计划检修状态</TextBlock>
+                    <Image Name="imgCheckState"  Source="/Resource/Normal.png" Width="25" HorizontalAlignment="Right" ></Image>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>故障维修状态</TextBlock>
+                    <Image Name="imgErrorState"  Source="/Resource/Normal.png" Width="25" HorizontalAlignment="Right" ></Image>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>待机状态</TextBlock>
+                    <Image Name="imgWaitState"  Source="/Resource/Normal.png" Width="25" HorizontalAlignment="Right" ></Image>
                 </StackPanel>
             </StackPanel>
             <!--信息-->
@@ -68,10 +79,10 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{Binding null}" Name="txbXinXi" FontSize="20" Width="20" 
                         FontFamily="/MesToPlc;component/#iconfont" Text="&#xe6a2;"
-                          Margin="30,0,100,0"
-                        Foreground="White"  VerticalAlignment="Center">
+                          Margin="30,0,100,0" Foreground="White"
+                          VerticalAlignment="Center">
                     </TextBlock>
-                        <TextBlock Style="{Binding null}" VerticalAlignment="Center" FontSize="15"
+                        <TextBlock Name="txbCaiJiXinXi" Style="{Binding null}" VerticalAlignment="Center" FontSize="15"
                                Foreground="White" HorizontalAlignment="Center">采集信息</TextBlock>
                 </StackPanel>
             </Border>
@@ -152,8 +163,8 @@
                     <TextBlock>Port</TextBlock>
                     <TextBox Name="txtPort" Width="150"></TextBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                     <Button Name="btnSave" Margin="180,0" Width="80" FontSize="20" Click="btnSave_Click">保存</Button>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                     <Button Name="btnSave" Margin="140,0" Width="80" FontSize="20" Click="btnSave_Click">保存</Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

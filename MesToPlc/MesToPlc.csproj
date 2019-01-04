@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Models\ConnectMesModel.cs" />
     <Compile Include="Models\MesLoad.cs" />
+    <Compile Include="Models\SetModel.cs" />
     <Compile Include="Models\WindowShowState.cs" />
     <Compile Include="Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
